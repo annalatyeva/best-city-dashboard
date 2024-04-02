@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Лучший город для жизни</title>
+		<link rel="stylesheet" href="styles/normalize.css" />
+		<link rel="stylesheet" href="styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="/node_modules/tabbyjs/dist/css/tabby-ui.css" />
+	</head>
+	<body>
+		<ul data-tabs>
+			<li><a data-tabby-default href="#Ekb">Екатеринбург</a></li>
+			<li><a href="#Spb">Санкт-Петербург</a></li>
+			<li><a href="#Msk">Москва</a></li>
+		</ul>
+		<div class="container">
+			<div id="Ekb"></div>
+			<div id="Spb"></div>
+			<div id="Msk"></div>
+		</div>
+
+		<script src="scripts/cities.js"></script>
+		<script src="/node_modules/chart.js/dist/chart.umd.js"></script>
+		<script src="/node_modules/tabbyjs/dist/js/tabby.js"></script>
+		<script src="node_modules/weather.js/dist/weather.js"></script>
+		<script src="index.js"></script>
+		<footer></footer>
+	</body>
+</html>
