@@ -84,7 +84,7 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
       'Школы',
       'Ссузы',
       'Вузы',
-      'Мадицина',
+      'Медицина',
       'Отопление',
       'Водоснабжение',
       'Канализация',
@@ -130,9 +130,14 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
     }
   ]},
   options: { 
+    // responsive: true,
+    aspectRatio: 2|0.9,
     plugins: {
       legend: {
         labels: {
+          // padding: 30,
+          // color: 'black',
+          // padding: 10,
           font: {
             size: 16
           }
@@ -142,6 +147,24 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
     elements: {
       line: {
         borderWidth: 3
+      }
+    },
+    scales: {
+      r: {
+        beginAtZero: true,
+        max: 10,
+        grid: {
+          circular: true
+        },
+        ticks: {
+          stepSize: 2
+        },
+        pointLabels: {
+          // padding: 5,
+          font: {
+            size: 16
+          }
+        }
       }
     }
   },
@@ -158,7 +181,9 @@ new Chart(document.getElementById(`${city}MenWomen`), {
         barPercentage: 1,
         categoryPercentage: 1,
         borderColor: 'black',
-        borderWidth: 1
+        borderWidth: 1,
+        borderSkipped: 'middle',
+        // borderSkipped: 'left',
       },
       {
         label: 'Женщины',
