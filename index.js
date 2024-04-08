@@ -49,11 +49,12 @@ function showData (city, index, region, GrowthIndexArr, AgePeopleMax) {
   </div>
   <div class='charts-container'>
     <div class='charts'>
-      <canvas id='${city}GrowthIndex'></canvas>
+      <canvas id='${city}GrowthIndexFirst'></canvas>
     </div>
     <div class='charts'>
-      <canvas id='${city}MenWomen'></canvas>
+      <canvas id='${city}GrowthIndexSecond'></canvas>
     </div>
+
   </div>
 </div>`;
 
@@ -68,7 +69,7 @@ document.getElementById(`${city}BuyNoNewFlat`).innerHTML = Cities[index].buyNoNe
 document.getElementById(`${city}TempMax`).innerHTML = Cities[index].tempMax + '&deg;' + 'C';
 document.getElementById(`${city}TempMin`).innerHTML = Cities[index].tempMin + '&deg;' + 'C';
 
-new Chart(document.getElementById(`${city}GrowthIndex`), {
+new Chart(document.getElementById(`${city}GrowthIndexFirst`), {
   type: 'radar',
   data: {
   labels: [
@@ -84,20 +85,10 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
       'Школы',
       'Ссузы',
       'Вузы',
-      'Медицина',
-      'Отопление',
-      'Водоснабжение',
-      'Канализация',
-      'Коммунальная инфраструктура',
-      'Состояние жилья',
-      'Высокоскоростной интернет',
-      'Стационарная связь',
-      'Мобильная связь',
-      'Наличие интернета в огранизациях',
     ],
     datasets: [{
       label: region,
-      data: GrowthIndexArr,
+      data: GrowthIndexArr.slice(0, 12),
       fill: true,
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       borderColor: 'rgb(255, 99, 132)',
@@ -108,7 +99,7 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
       pointHoverBorderColor: 'rgb(255, 99, 132)'
     }, {
       label: 'Минимальные значения',
-      data: minGrowthIndexArr,
+      data: minGrowthIndexArr.slice(0, 12),
       fill: true,
       backgroundColor: 'rgba(54, 162, 235, 0.3)',
       borderColor: 'rgb(54, 162, 235, 0)',
@@ -119,7 +110,7 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
     },
     {
       label: 'Максимальные значения',
-      data: maxGrowthIndexArr,
+      data: maxGrowthIndexArr.slice(0, 12),
       fill: true,
       backgroundColor: 'rgba(54, 162, 90, 0.1)',
       borderColor: 'rgb(54, 162, 235, 0)',
@@ -130,14 +121,10 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
     }
   ]},
   options: { 
-    // responsive: true,
     aspectRatio: 2|0.9,
     plugins: {
       legend: {
         labels: {
-          // padding: 30,
-          // color: 'black',
-          // padding: 10,
           font: {
             size: 16
           }
@@ -157,10 +144,9 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
           circular: true
         },
         ticks: {
-          stepSize: 2
+          stepSize: 2,
         },
         pointLabels: {
-          // padding: 5,
           font: {
             size: 16
           }
@@ -170,40 +156,58 @@ new Chart(document.getElementById(`${city}GrowthIndex`), {
   },
 });
 
-new Chart(document.getElementById(`${city}MenWomen`), {
-  type: 'bar',
+new Chart(document.getElementById(`${city}GrowthIndexSecond`), {
+  type: 'radar',
   data: {
-    labels: Object.keys(Cities[index].men).reverse(),
+  labels: [
+      'Медицина',
+      'Отопление',
+      'Водоснабжение',
+      'Канализация',
+      'Коммунальная инфраструктура',
+      'Состояние жилья',
+      'Высокоскоростной интернет',
+      'Стационарная связь',
+      'Мобильная связь',
+      'Наличие интернета в огранизациях',
+    ],
     datasets: [{
-        label: 'Мужчины',
-        data: Object.values(Cities[index].men).reverse().map((el) => -el), 
-        backgroundColor: 'lightBlue',
-        barPercentage: 1,
-        categoryPercentage: 1,
-        borderColor: 'black',
-        borderWidth: 1,
-        borderSkipped: 'middle',
-        // borderSkipped: 'left',
-      },
-      {
-        label: 'Женщины',
-        data: Object.values(Cities[index].women).reverse(),
-        backgroundColor: 'pink',
-        barPercentage: 1,
-        categoryPercentage: 1,
-        borderColor: 'black',
-        borderWidth: 1,
-        borderSkipped: 'none' 
-      }
-    ]
-  },
-  options: {
+      label: region,
+      data: GrowthIndexArr.slice(12),
+      fill: true,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgb(255, 99, 132)',
+      borderWidth: 2,
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    }, {
+      label: 'Минимальные значения',
+      data: minGrowthIndexArr.slice(12),
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.3)',
+      borderColor: 'rgb(54, 162, 235, 0)',
+      pointBackgroundColor: 'rgb(54, 162, 235)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(54, 162, 235)'
+    },
+    {
+      label: 'Максимальные значения',
+      data: maxGrowthIndexArr.slice(12),
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 90, 0.1)',
+      borderColor: 'rgb(54, 162, 235, 0)',
+      pointBackgroundColor: 'rgb(54, 162, 90)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(54, 162, 235)'
+    }
+  ]},
+  options: { 
+    aspectRatio: 2|0.9,
     plugins: {
-      tooltip: {
-        callbacks: {
-          label: (ttItem) => (Math.abs(ttItem.parsed.x)) 
-        }
-      },
       legend: {
         labels: {
           font: {
@@ -211,25 +215,92 @@ new Chart(document.getElementById(`${city}MenWomen`), {
           }
         }
       }
+  },
+    elements: {
+      line: {
+        borderWidth: 3
+      }
     },
-    indexAxis: 'y',
     scales: {
-      y: {
-        stacked: true,
+      r: {
+        beginAtZero: true,
+        max: 10,
         grid: {
-          display: false
-        }
-      },
-      x: {
-        min: -AgePeopleMax,
-        max: AgePeopleMax,
+          circular: true
+        },
         ticks: {
-          callback: (val) => (Math.abs(val))
+          stepSize: 2,
+        },
+        pointLabels: {
+          font: {
+            size: 16
+          }
         }
       }
     }
-  }
+  },
 });
+
+// new Chart(document.getElementById(`${city}MenWomen`), {
+//   type: 'bar',
+//   data: {
+//     labels: Object.keys(Cities[index].men).reverse(),
+//     datasets: [{
+//         label: 'Мужчины',
+//         data: Object.values(Cities[index].men).reverse().map((el) => -el), 
+//         backgroundColor: 'lightBlue',
+//         barPercentage: 1,
+//         categoryPercentage: 1,
+//         borderColor: 'black',
+//         borderWidth: 1,
+//         borderSkipped: 'middle',
+//         borderSkipped: 'left',
+//       },
+//       {
+//         label: 'Женщины',
+//         data: Object.values(Cities[index].women).reverse(),
+//         backgroundColor: 'pink',
+//         barPercentage: 1,
+//         categoryPercentage: 1,
+//         borderColor: 'black',
+//         borderWidth: 1,
+//         borderSkipped: 'middle' 
+//       }
+//     ]
+//   },
+//   options: {
+//     plugins: {
+//       tooltip: {
+//         callbacks: {
+//           label: (ttItem) => (Math.abs(ttItem.parsed.x)) 
+//         }
+//       },
+//       legend: {
+//         labels: {
+//           font: {
+//             size: 16
+//           }
+//         }
+//       }
+//     },
+//     indexAxis: 'y',
+//     scales: {
+//       y: {
+//         stacked: true,
+//         grid: {
+//           display: false
+//         }
+//       },
+//       x: {
+//         min: -AgePeopleMax,
+//         max: AgePeopleMax,
+//         ticks: {
+//           callback: (val) => (Math.abs(val))
+//         }
+//       }
+//     }
+//   }
+// });
 }
 
 showData ('Ekb', 0, 'Свердловская область', EkbGrowthIndexArr, 70000);
