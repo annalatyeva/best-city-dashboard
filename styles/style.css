@@ -1,14 +1,27 @@
 body {
-    max-width: 1700px;
+    max-width: 1650px;
     margin: auto;
 }
 
 [data-tabs] li {
     margin-top: 10px;
 }
-[data-tabs] li a {
+
+[role="tab"] {
     color: black;
+    background-color: #d4f4cc;
 }
+
+[data-tabs] li a:focus {
+    background-color: #5fa4c6;
+}
+
+@media (max-width: 1023px) {
+    [data-tabs] li a {
+        font-size: 18px;
+    }
+}
+
 .container {
     margin: 0 5px;
     border: solid 1px lightgray;
@@ -35,6 +48,13 @@ body {
     outline: solid 3px #ffffff;
     box-shadow: 0 0 0 4px  lightgray;
 }
+
+@media (max-width: 1023px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        }
+    }
+
 .dashboard-container-second {
     text-align: center;
     display:grid;
@@ -43,9 +63,17 @@ body {
     outline: solid 3px #ffffff;
     box-shadow: 0 0 0 4px  lightgray;
 }
+
+@media (max-width: 1023px) {
+    .dashboard-container-second {
+        grid-template-columns: 1fr;
+        }
+    }
+
 .dashboard-container_item {
     padding: 17px;
 }
+
 .dashboard-container_item-second {
     padding: 10px;
 }
@@ -55,47 +83,88 @@ body {
     font-weight:700;
     padding: 15px;
 }
+
 .data-second {
     font-size: 22px;
     padding: 10px;
 }
+
 .data-label {
-    font-size: 16px;
+    font-size: 18px;
 }
 
-.dark-blue {
-    background-color: #2b8cbe;
+.data-label-second {
+    font-size: 17px;
 }
+
+@media (max-width: 1025px) {
+    .data, .data-second {
+        font-size: 21px;
+        padding: 5px;
+    }
+    
+    .data-label, .data-label-second {
+        font-size: 18px;
+    }
+}
+.dark-blue {
+    background-color: #509ec5;
+}
+
 .blue {
     background-color: #4eb3d3;
 }
+
 .light-blue {
     background-color: #7bccc4;
 }
+
 .dark-green {
     background-color: #a8ddb5;
 }
+
 .green {
     background-color: #ccebc5;
 }
+
 .light-green {
     background-color: #d4f4cc;
 }
+
 .very-light-green {
     background-color: #e0f3db;
 }
 
 .charts-container {
     width: 100%;
+    margin-bottom: 5px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     border: solid 1px lightgray;
     outline: solid 3px #ffffff;
     box-shadow: 0 0 0 4px  lightgray;
 }
-.charts {
-    padding: 20px 0 0px;
-    width: 47%; 
+
+@media (max-width: 1023px) {
+    .dashboard-container, .dashboard-container-second, .charts-container {
+        border: none;
+        outline: none;
+    }
 }
+
+.charts {
+    padding: 30px 0 0px;
+    width: 49%; 
+}
+
+@media (max-width: 1023px) {
+    .charts {
+        padding: 0;
+        width: 85%;
+    }
+}
+
+
 
 
