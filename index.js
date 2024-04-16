@@ -9,57 +9,58 @@ for (let i = 0; i < EkbGrowthIndexArr.length; i++) {
   maxGrowthIndexArr.push(Math.max(EkbGrowthIndexArr[i], SpbGrowthIndexArr[i], MscGrowthIndexArr[i]));
 }
 
-let screenWidth = document.documentElement.clientWidth;
-
 function getChartsFontSize() {
   if (screenWidth >= 1500) {
     return 16;
-  }
-  else if (screenWidth >= 1200) {
+  } else if (screenWidth >= 1200) {
     return 17;
-  }
-  else {
+  } else if (screenWidth >= 800) {
     return 16;
+  } else {
+    return 21;
   }
 }
 
 function showData (city, index, region, GrowthIndexArr, AgePeopleMax) {
-  document.getElementById(city).innerHTML = `<h2 id='${city}CityName' class='CityName'></h2>
+  document.getElementById(city).innerHTML = `<h2 class='CityName'>${Cities[index].city}</h2>
   <div class='dashboard-container'>
     <div class='dashboard-container_item dark-blue'>
-      <div id='${city}Salary' class='data'></div>
+      <div class='data'>${Cities[index].averageSalary + ' руб.'}</div>
       <div class='data-label'>cредняя зарплата</div>
     </div>
     <div class='dashboard-container_item blue'>
-      <div id='${city}Polution' class='data'></div>
+      <div class='data'>${Cities[index].ecology}</div>
       <div class='data-label'>уровень загрязнения воздуха</div>
     </div>
     <div class='dashboard-container_item light-blue'>
-      <div id='${city}Density' class='data'></div>
+      <div class='data'>${Cities[index].density() + ' чел./км' + '&sup2;'}</div>
       <div class='data-label'>плотность населения</div>
     </div>
   </div>
   <div class='dashboard-container-second'>
     <div>
       <div class='dashboard-container_item-second dark-green'>
-        <div id='${city}BuyNewFlat' class='data data-second'></div>
+        <div class='data data-second'>${Cities[index].buyNewFlat + ' руб./м' + '&sup2;'}</div>
         <div class='data-label-second'>цена квартир в новостройках</div>
       </div>
       <div class='dashboard-container_item-second green'>
-        <div id='${city}BuyNoNewFlat' class='data data-second'></div>
+        <div class='data data-second'>${Cities[index].buyNoNewFlat + ' руб./м' + '&sup2;'}</div>
         <div class='data-label-second'>цена квартир  во вторичке</div>
       </div>
     </div>
     <div>
       <div class='dashboard-container_item-second light-green'>
-        <div id='${city}TempMax' class='data data-second'></div>
+        <div class='data data-second'>${Cities[index].tempMax + '&deg;' + 'C'}</div>
         <div class='data-label-second'>средняя температура летом</div>
       </div>
       <div class='dashboard-container_item-second very-light-green'>
-        <div id='${city}TempMin' class='data data-second'></div>
+        <div class='data data-second'>${Cities[index].tempMin + '&deg;' + 'C'}</div>
         <div class='data-label-second'>средняя температура зимой</div>
       </div>
     </div>
+  </div>
+  <div class='charts mobileChartLabels'>
+    <canvas id='${city}mobileChartLabels'></canvas>
   </div>
   <div class='charts-container'>
     <div class='charts'>
@@ -68,198 +69,404 @@ function showData (city, index, region, GrowthIndexArr, AgePeopleMax) {
     <div class='charts'>
       <canvas id='${city}GrowthIndexSecond'></canvas>
     </div>
+    <div class='charts mobileChartLabels'>
+      <canvas id='${city}GrowthIndexThird'></canvas>
+    </div>
     <div class='charts'>
       <canvas id='${city}MenWomen'></canvas>
     </div>
   </div>
 </div>`;
 
-document.getElementById(`${city}CityName`).textContent = Cities[index].city;
-document.getElementById(`${city}Salary`).textContent = Cities[index].averageSalary + ' руб.'; 
-document.getElementById(`${city}Polution`).textContent = Cities[index].ecology;
-document.getElementById(`${city}Density`).innerHTML = Cities[index].density() + ' чел./км' + '&sup2;';
-
-document.getElementById(`${city}BuyNewFlat`).innerHTML = Cities[index].buyNewFlat + ' руб./м' + '&sup2;';
-document.getElementById(`${city}BuyNoNewFlat`).innerHTML = Cities[index].buyNoNewFlat + ' руб./м' + '&sup2;';
-
-document.getElementById(`${city}TempMax`).innerHTML = Cities[index].tempMax + '&deg;' + 'C';
-document.getElementById(`${city}TempMin`).innerHTML = Cities[index].tempMin + '&deg;' + 'C';
-
-new Chart(document.getElementById(`${city}GrowthIndexFirst`), {
-  type: 'radar',
-  data: {
-  labels: [
-      'Автодороги',
-      'Железные дороги',
-      'Авиаинфраструктура',
-      'Генерация энергии',
-      screenWidth >= 1500 ? 'Обеспеченность энергией': ['Обеспеченность', 'энергией'],
-      'Потребление энергии',
-      screenWidth >= 1500 ? 'Распределительные сети' : ['Распределительные', 'сети'],
-      screenWidth >= 1500 ? 'Спортивные сооружения' : ['Спортивные', 'сооружения'],
-      'Детские сады',
-      'Школы',
-      'Ссузы',
-      'Вузы',
-    ],
-    datasets: [{
-      label: region,
-      data: GrowthIndexArr.slice(0, 12),
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.3)',
-      borderColor: 'rgb(255, 99, 132)',
-      borderWidth: 2,
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(255, 99, 132)'
-    }, {
-      label: 'Минимальные значения',
-      data: minGrowthIndexArr.slice(0, 12),
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 235, 0.3)',
-      borderColor: 'rgb(54, 162, 235, 0)',
-      pointBackgroundColor: 'rgb(54, 162, 235)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(54, 162, 235)'
+function addBigScreenCharts() {
+  new Chart(document.getElementById(`${city}GrowthIndexFirst`), {
+    type: 'radar',
+    data: {
+    labels: growthIndexLabels.slice(0, 12),
+      datasets: [{
+        label: region,
+        data: GrowthIndexArr.slice(0, 12),
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }, {
+        label: 'Минимальные значения',
+        data: minGrowthIndexArr.slice(0, 12),
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.3)',
+        borderColor: 'rgb(54, 162, 235, 0)',
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      },
+      {
+        label: 'Максимальные значения',
+        data: maxGrowthIndexArr.slice(0, 12),
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 90, 0.2)',
+        borderColor: 'rgb(54, 162, 235, 0)',
+        pointBackgroundColor: 'rgb(54, 162, 90)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      }
+    ]},
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: screenWidth <= 1500 ? 1|1 : 2|0.9,
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: getChartsFontSize(),
+            }
+          }
+        }
     },
-    {
-      label: 'Максимальные значения',
-      data: maxGrowthIndexArr.slice(0, 12),
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 90, 0.2)',
-      borderColor: 'rgb(54, 162, 235, 0)',
-      pointBackgroundColor: 'rgb(54, 162, 90)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(54, 162, 235)'
-    }
-  ]},
-  options: {
-    responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: screenWidth <= 1500 ? 1|1 : 2|0.9,
-    plugins: {
-      legend: {
-        labels: {
-          font: {
-            size: getChartsFontSize(),
+      elements: {
+        line: {
+          borderWidth: 3
+        }
+      },
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 10,
+          grid: {
+            circular: true
+          },
+          ticks: {
+            stepSize: 2,
+          },
+          pointLabels: {
+            font: {
+              size: getChartsFontSize()
+            }
           }
         }
       }
-  },
-    elements: {
-      line: {
-        borderWidth: 3
-      }
     },
-    scales: {
-      r: {
-        beginAtZero: true,
-        max: 10,
-        grid: {
-          circular: true
-        },
-        ticks: {
-          stepSize: 2,
-        },
-        pointLabels: {
-          font: {
-            size: getChartsFontSize()
-          }
-        }
-      }
-    }
-  },
-});
+  });
 
-new Chart(document.getElementById(`${city}GrowthIndexSecond`), {
-  type: 'radar',
-  data: {
-  labels: [
-      'Медицина',
-      'Отопление',
-      'Водоснабжение',
-      'Канализация',
-      screenWidth >= 1500 ? 'Коммунальная инфраструктура' : ['Коммунальная', 'инфраструктура'],
-      screenWidth >= 1500 ? 'Состояние жилья' : ['Состояние', 'жилья'],
-      screenWidth >= 1500 ? 'Высокоскоростной интернет' : ['Высокоскоростной', 'интернет'],
-      'Стационарная связь',
-      'Мобильная связь',
-      screenWidth >= 1500 ? 'Наличие интернета в огранизациях' : ['Наличие интернета', 'в огранизациях'],
-    ],
-    datasets: [{
-      label: region,
-      data: GrowthIndexArr.slice(12),
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.3)',
-      borderColor: 'rgb(255, 99, 132)',
-      borderWidth: 2,
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(255, 99, 132)'
-    }, {
-      label: 'Минимальные значения',
-      data: minGrowthIndexArr.slice(12),
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 235, 0.3)',
-      borderColor: 'rgb(54, 162, 235, 0)',
-      pointBackgroundColor: 'rgb(54, 162, 235)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(54, 162, 235)'
+  new Chart(document.getElementById(`${city}GrowthIndexSecond`), {
+    type: 'radar',
+    data: {
+    labels: growthIndexLabels.slice(12),
+      datasets: [{
+        label: region,
+        data: GrowthIndexArr.slice(12),
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }, {
+        label: 'Минимальные значения',
+        data: minGrowthIndexArr.slice(12),
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.3)',
+        borderColor: 'rgb(54, 162, 235, 0)',
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      },
+      {
+        label: 'Максимальные значения',
+        data: maxGrowthIndexArr.slice(12),
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 90, 0.2)',
+        borderColor: 'rgb(54, 162, 235, 0)',
+        pointBackgroundColor: 'rgb(54, 162, 90)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      }
+    ]},
+    options: { 
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: screenWidth <= 1500 ? 1|1 : 2|0.9,
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: getChartsFontSize(),
+            }
+          }
+        }
     },
-    {
-      label: 'Максимальные значения',
-      data: maxGrowthIndexArr.slice(12),
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 90, 0.2)',
-      borderColor: 'rgb(54, 162, 235, 0)',
-      pointBackgroundColor: 'rgb(54, 162, 90)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(54, 162, 235)'
-    }
-  ]},
-  options: { 
-    responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: screenWidth <= 1500 ? 1|1 : 2|0.9,
-    plugins: {
-      legend: {
-        labels: {
-          font: {
-            size: getChartsFontSize(),
+      elements: {
+        line: {
+          borderWidth: 3
+        }
+      },
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 10,
+          grid: {
+            circular: true
+          },
+          ticks: {
+            stepSize: 2,
+          },
+          pointLabels: {
+            font: {
+              size: getChartsFontSize(),
+            }
           }
         }
       }
-  },
-    elements: {
-      line: {
-        borderWidth: 3
-      }
     },
-    scales: {
-      r: {
-        beginAtZero: true,
-        max: 10,
-        grid: {
-          circular: true
+  });
+};
+
+function addMobileScreenCharts() {
+  new Chart(document.getElementById(`${city}mobileChartLabels`), {
+    data: {
+      datasets: [{
+        type: 'bar',
+        label: region,
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        borderColor: 'black',
+        borderWidth: 1,
+        }, 
+        {
+        type: 'bar',
+        label: 'Максимальные значения',
+        backgroundColor: 'rgba(54, 162, 90, 1)',
+        borderColor: 'black',
+        borderWidth: 1,
         },
-        ticks: {
-          stepSize: 2,
+        {
+        type: 'bar',
+        label: 'Минимальные значения',
+        backgroundColor: 'rgba(54, 162, 235, 1)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderColor: 'black',
+        borderWidth: 1,
         },
-        pointLabels: {
-          font: {
-            size: getChartsFontSize(),
+      ],
+    },
+    options:{
+      scales: {
+        x: {
+          display: false,
+        },
+        y: {
+          display: false,
+        }
+      },
+    }
+  });
+  new Chart(document.getElementById(`${city}GrowthIndexFirst`), {
+    data: {
+      labels: growthIndexLabels.slice(0, 7),
+      datasets: [{
+        type: 'bar',
+        label: region,
+        data: GrowthIndexArr.slice(0, 7),
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        barPercentage: 1,
+        borderColor: 'black',
+        borderWidth: 1,
+        }, 
+        {
+        type: 'line',
+        label: 'Максимальные значения',
+        data: maxGrowthIndexArr.slice(0, 7),
+        backgroundColor: 'rgba(54, 162, 90, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 90, 1)',
+        borderWidth: 2,
+        },
+        {
+        type: 'line',
+        label: 'Минимальные значения',
+        data: minGrowthIndexArr.slice(0, 7),
+        backgroundColor: 'rgba(54, 162, 235, 1)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      aspectRatio: 1.2|0.5,
+      plugins: {
+        legend: false,
+      },
+      scales: {
+        y: {
+          ticks: {
+            stepSize: 2,
+          },
+          beginAtZero: true,
+          max: 10,
+        },
+        x: {
+          stacked: true,
+          ticks: {
+            stepSize: 2,
+          },
+          ticks: {
+            autoSkip: false,
+            maxRotation: 90,
+            minRotation: 90
+          },
+          pointLabels: {
+            font: {
+              size: getChartsFontSize(),
+            }
           }
         }
-      }
-    }
-  },
-});
+      },
+    },
+  });
+  new Chart(document.getElementById(`${city}GrowthIndexSecond`), {
+    data: {
+      labels: growthIndexLabels.slice(7, 15),
+      datasets: [{
+        type: 'bar',
+        label: region,
+        data: GrowthIndexArr.slice(7, 15),
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        barPercentage: 1,
+        borderColor: 'black',
+        borderWidth: 1,
+        }, 
+        {
+        type: 'line',
+        label: 'Максимальные значения',
+        data: maxGrowthIndexArr.slice(7, 15),
+        backgroundColor: 'rgba(54, 162, 90, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 90, 1)',
+        borderWidth: 2,
+        },
+        {
+        type: 'line',
+        label: 'Минимальные значения',
+        data: minGrowthIndexArr.slice(7, 15),
+        backgroundColor: 'rgba(54, 162, 235, 1)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: false,
+    },
+      aspectRatio: 1.2|0.5,
+      scales: {
+        y: {
+          ticks: {
+            stepSize: 2,
+          },
+          beginAtZero: true,
+          max: 10,
+        },
+        x: {
+          stacked: true,
+          ticks: {
+            autoSkip: false,
+            maxRotation: 90,
+            minRotation: 90,
+          },
+          pointLabels: {
+            font: {
+              size: getChartsFontSize(),
+            }
+          }
+        }
+      },
+    },
+  });
+
+  new Chart(document.getElementById(`${city}GrowthIndexThird`), {
+    data: {
+      labels: growthIndexLabels.slice(15),
+      datasets: [{
+        type: 'bar',
+        label: region,
+        data: GrowthIndexArr.slice(15),
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        barPercentage: 1,
+        borderColor: 'black',
+        borderWidth: 1,
+        }, 
+        {
+        type: 'line',
+        label: 'Максимальные значения',
+        data: maxGrowthIndexArr.slice(15),
+        backgroundColor: 'rgba(54, 162, 90, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 90, 1)',
+        borderWidth: 2,
+        },
+        {
+        type: 'line',
+        label: 'Минимальные значения',
+        data: minGrowthIndexArr.slice(15),
+        backgroundColor: 'rgba(54, 162, 235, 1)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        barPercentage: 1,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: false,
+    },
+      aspectRatio: 1.2|0.5,
+      scales: {
+        y: {
+          ticks: {
+            stepSize: 2,
+          },
+          beginAtZero: true,
+          max: 10,
+        },
+        x: {
+          stacked: true,
+          ticks: {
+            autoSkip: false,
+            maxRotation: 90,
+            minRotation: 90,
+          },
+          pointLabels: {
+            font: {
+              size: getChartsFontSize(),
+            }
+          }
+        }
+      },
+    },
+  });
+}
+
+if (screenWidth > 800) {
+  addBigScreenCharts();
+} else {
+  addMobileScreenCharts();
+}
 
 new Chart(document.getElementById(`${city}MenWomen`), {
   type: 'bar',

@@ -153,6 +153,12 @@ body {
     }
 }
 
+@media (max-width: 800px) {
+    .charts-container {
+        margin-top: -65px;
+    }
+}
+
 .charts {
     padding: 30px 0 0px;
     width: 49%; 
@@ -165,6 +171,15 @@ body {
     }
 }
 
+.mobileChartLabels {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .mobileChartLabels {
+        display: block;
+    }
+}
 
 
 
