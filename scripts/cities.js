@@ -9,15 +9,12 @@ const Cities = [
             return (this.population / this.area).toFixed(1);
         },
         averageSalary: 53400,
-        averageSalaryUrl: 'https://bdex.ru/ratings/cities-salary/',
+        
         ecology: 'Повышенный',
-        ecologyUrl: 'https://taqi.strelka-kb.com/',
         tempMin: -11.5,
         tempMax: 17.4,
-        tempUrl: 'https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php',
         buyNewFlat: '141 494',
         buyNoNewFlat: '121 893',
-        buyFlatUrl: 'https://www.realtymag.ru/kvartira/prodazha/prices',
         growthIndex: {
             autoRoads: 5.02,
             trainRoads: 1.12,
@@ -42,7 +39,6 @@ const Cities = [
             mobile: 6.36,
             internetInCompany: 9.47,
         },
-        growthIndexUrl: 'https://infraoneresearch.ru/index_id/regions/62-sverdlovsk_region.html',
         men: {
             '0-4': 35661,
             '5-9': 29771,
@@ -83,7 +79,6 @@ const Cities = [
             '80-84': 18724,
             '85-100': 9953,
         },
-        populationUrl: 'https://rosinfostat.ru/naselenie-ekaterinburga/',
     },
     {
         city: 'Санкт-Петербург',
@@ -93,15 +88,11 @@ const Cities = [
             return (this.population / this.area).toFixed(1);
         },
         averageSalary: 74400,
-        averageSalaryUrl: 'https://bdex.ru/ratings/cities-salary/',
         ecology: 'Высокий',
-        ecologyUrl: 'https://taqi.strelka-kb.com/',
         tempMin: -5.0,
         tempMax: 17.2,
-        tempUrl: 'https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php',
         buyNewFlat: 299204,
         buyNoNewFlat: 198225,
-        buyFlatUrl: 'https://www.realtymag.ru/kvartira/prodazha/prices',
         growthIndex: {
             autoRoads: 5.02,
             trainRoads: 2.8,
@@ -126,7 +117,6 @@ const Cities = [
             mobile: 8.35,
             internetInCompany: 9.43,
         },
-        growthIndexUrl: 'https://infraoneresearch.ru/index_id/regions/36-leningrad_region.html',
         men: {
             '0-4': 117875,
             '5-9': 138766,
@@ -176,15 +166,11 @@ const Cities = [
             return (this.population / this.area).toFixed(1);
         },
         averageSalary: 113600,
-        averageSalaryUrl: 'https://bdex.ru/ratings/cities-salary/',
         ecology: 'Высокий',
-        ecologyUrl: 'https://taqi.strelka-kb.com/',
         tempMin: -6.1,
         tempMax: 17.7,
-        tempUrl: 'https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php',
         buyNewFlat: 295851,
         buyNoNewFlat: 328173,
-        buyFlatUrl: 'https://www.realtymag.ru/kvartira/prodazha/prices',
         growthIndex: {
             autoRoads: 5.59,
             trainRoads: 5.89,
@@ -209,7 +195,6 @@ const Cities = [
             mobile: 10,
             internetInCompany: 8.96,
         },
-        growthIndexUrl: 'https://infraoneresearch.ru/index_id/regions/42-moscow_region.html',
         men: {
             '0-4': 223951,
             '5-9': 312282,
@@ -277,5 +262,15 @@ const growthIndexLabels = [
     'Мобильная связь',
     screenWidth >= 1500 ? 'Наличие интернета в огранизациях' : ['Наличие интернета', 'в огранизациях'],
 ];
+
+const UrlTooltips = {
+    averageSalaryUrl: 'https://bdex.ru/ratings/cities-salary/',
+    ecologyUrl: 'https://taqi.strelka-kb.com/',
+    populationUrl: 'https://rosinfostat.ru/naselenie-ekaterinburga/',
+    buyFlatUrl: `https://www.realtymag.ru/
+    kvartira/prodazha/prices`,
+    tempUrl: 'https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php',
+    growthIndexUrl: 'https://infraoneresearch.ru/',
+}
 
 

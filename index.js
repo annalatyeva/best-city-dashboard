@@ -22,39 +22,64 @@ function getChartsFontSize() {
 }
 
 function showData (city, index, region, GrowthIndexArr, AgePeopleMax) {
+  function showTooltip (tooltipUrl) {
+    return `<span class='url-tooltip'>По материалам сайта ${tooltipUrl}</span>`;
+  }
+
   document.getElementById(city).innerHTML = `<h2 class='CityName'>${Cities[index].city}</h2>
   <div class='dashboard-container'>
     <div class='dashboard-container_item dark-blue'>
-      <div class='data'>${Cities[index].averageSalary + ' руб.'}</div>
+      <div class='data'>${Cities[index].averageSalary + ' руб.'}
+        <img class='info-img' src='assets/info-icon.png'>
+        ${showTooltip(UrlTooltips.averageSalaryUrl)}
+      </div>
       <div class='data-label'>cредняя зарплата</div>
     </div>
     <div class='dashboard-container_item blue'>
-      <div class='data'>${Cities[index].ecology}</div>
+      <div class='data'>${Cities[index].ecology}
+        <img class='info-img' src='assets/info-icon.png'>
+        ${showTooltip(UrlTooltips.ecologyUrl)}
+      </div>
       <div class='data-label'>уровень загрязнения воздуха</div>
     </div>
     <div class='dashboard-container_item light-blue'>
-      <div class='data'>${Cities[index].density() + ' чел./км' + '&sup2;'}</div>
+      <div class='data'>${Cities[index].density() + ' чел./км' + '&sup2;'}
+        <img class='info-img' src='assets/info-icon.png'>
+        ${showTooltip(UrlTooltips.populationUrl)}
+      </div>
       <div class='data-label'>плотность населения</div>
     </div>
   </div>
   <div class='dashboard-container-second'>
     <div>
       <div class='dashboard-container_item-second dark-green'>
-        <div class='data data-second'>${Cities[index].buyNewFlat + ' руб./м' + '&sup2;'}</div>
+        <div class='data data-second'>${Cities[index].buyNewFlat + ' руб./м' + '&sup2;'}
+          <img class='info-img' src='assets/info-icon.png'>
+          ${showTooltip(UrlTooltips.buyFlatUrl)}
+        </div>
         <div class='data-label-second'>цена квартир в новостройках</div>
       </div>
       <div class='dashboard-container_item-second green'>
-        <div class='data data-second'>${Cities[index].buyNoNewFlat + ' руб./м' + '&sup2;'}</div>
+        <div class='data data-second'>${Cities[index].buyNoNewFlat + ' руб./м' + '&sup2;'}
+          <img class='info-img' src='assets/info-icon.png'>
+          ${showTooltip(UrlTooltips.buyFlatUrl)}
+        </div>
         <div class='data-label-second'>цена квартир  во вторичке</div>
       </div>
     </div>
     <div>
       <div class='dashboard-container_item-second light-green'>
-        <div class='data data-second'>${Cities[index].tempMax + '&deg;' + 'C'}</div>
+        <div class='data data-second'>${Cities[index].tempMax + '&deg;' + 'C'}
+          <img class='info-img' src='assets/info-icon.png'>
+          ${showTooltip(UrlTooltips.tempUrl)}
+        </div>
         <div class='data-label-second'>средняя температура летом</div>
       </div>
       <div class='dashboard-container_item-second very-light-green'>
-        <div class='data data-second'>${Cities[index].tempMin + '&deg;' + 'C'}</div>
+        <div class='data data-second'>${Cities[index].tempMin + '&deg;' + 'C'}
+          <img class='info-img' src='assets/info-icon.png'>
+          ${showTooltip(UrlTooltips.tempUrl)}
+        </div>
         <div class='data-label-second'>средняя температура зимой</div>
       </div>
     </div>
