@@ -86,7 +86,10 @@ function showData(city, index, region, GrowthIndexArr, AgePeopleMax) {
     </div>
   </div>
   <div class='light-blue'>
-    <div class='chart-title'>Индекс развития региона</div>
+    <div class='chart-title'>Индекс развития региона
+      <img class='info-img' src='assets/info-icon.png'>
+      ${showTooltip(UrlTooltips.growthIndexUrl)}
+    </div>
   </div>
   <div class='charts mobileChartLabels'>
     <canvas id='${city}mobileChartLabels'></canvas>
@@ -102,7 +105,10 @@ function showData(city, index, region, GrowthIndexArr, AgePeopleMax) {
       <canvas id='${city}GrowthIndexThird'></canvas>
     </div>
     <div class='light-blue w-100'>
-      <div class='chart-title'>Возрастно-половая пирамида</div>
+      <div class='chart-title'>Возрастно-половая пирамида
+        <img class='info-img' src='assets/info-icon.png'>
+        ${showTooltip(UrlTooltips.populationUrl)}
+      </div>
     </div>
     <div class='charts'>
       <canvas id='${city}MenWomen'></canvas>

@@ -102,8 +102,16 @@ body {
     width: 256px;
     position: absolute;
     margin-top: 0px;
-    margin-left: 100px;
+    margin-left: 200px;
     z-index: 2;
+}
+
+@media (max-width:1024) {
+  .chart-title {
+    .url-tooltip {
+      margin-left: 50vw;
+    }
+  }
 }
 
 .info-img:hover + .url-tooltip {
