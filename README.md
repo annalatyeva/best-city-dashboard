@@ -17,7 +17,7 @@ average summer and winter temperatures, regional development index, and demograp
 On mobile devices, radar charts displaying the regional development index are converted to bar charts for better user experience.
 ![city dashboard mobile](https://github.com/annalatyeva/screenshots/blob/main/best-city-dashboard-mobile.png)
 
-### Installation
+## Installation
 
 1. Clone the repo
    ```sh
@@ -43,17 +43,18 @@ On mobile devices, radar charts displaying the regional development index are co
 - **Ecology**: [taqi.strelka-kb.com](https://taqi.strelka-kb.com/)
   - Description: This resource offers information about the environmental situation in various cities. It includes data on air quality, ecosystem status, and other ecological indicators, which can be helpful when choosing a place to live.
 
-- **Population**: [rosinfostat.ru](https://rosinfostat.ru/naselenie-ekaterinburga/)
-  - Description: This site contains data on the population size of cities. By studying this information, you can get an idea of the population growth or decline dynamics in a specific region.
+- **Population**: [rosinfostat.ru](https://rosinfostat.ru/goroda-i-oblasti-rossii/)
+  - Description: This site contains data on the population size of cities.
 
 - **Buying Flat Prices**: [realtymag.ru](https://www.realtymag.ru/kvartira/prodazha/prices)
   - Description: This resource provides information on apartment prices in different cities. Here you can find average housing prices and compare them, which can be useful when planning to buy real estate.
 
 - **Temperature**: [topogis.ru](https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php)
-  - Description: This website offers information on the climate of various cities in Russia. You can get acquainted with the temperature regime, precipitation levels, and other climate characteristics, which can be useful when choosing a place to live.
+  - Description: This website offers information on the climate of various cities in Russia. 
 
 - **Growth Index**: [infraoneresearch.ru](https://infraoneresearch.ru/)
   - Description: This site provides data on the growth index for various business and economic indicators of cities. Studying this information can help assess the growth and development potential of cities.
+  - 
 ### Feedback:
 
 I welcome your feedback and suggestions for improving the dashboard. Please feel free to reach out to us with your comments.
