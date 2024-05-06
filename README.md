@@ -15,26 +15,47 @@ average summer and winter temperatures, regional development index, and demograp
 
 ## Mobile Version:
 On mobile devices, radar charts displaying the regional development index are converted to bar charts for better user experience.
-![Alt-описание изображения](https://github.com/annalatyeva/screenshots/blob/main/best-city-dashboard-fullscreen.png)
+![city dashboard mobile](https://github.com/annalatyeva/screenshots/blob/main/best-city-dashboard-mobile.png)
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/annalatyeva/best-city-dashboard
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Enjoy
 
 ### How to Use:
+
 1. Open the dashboard and explore the tabs for each city.
 2. Compare the cities based on different parameters.
 3. Interact with the charts for detailed insights.
-4. Switch between radar and bar charts on mobile for a clear view.
 
-### Data Sources:
-- Statistical offices of Moscow, St. Petersburg, and Yekaterinburg
-- Government reports on air quality and regional development
-- Real estate databases for apartment prices
-- Weather services for temperature data
-- Demographic surveys for population distribution
+## Data Sources:
 
-### Contributors:
-- Design and Development: [Your Name/Team Name]
-- Data Analysis: [Data Analyst's Name]
+- **Average Salary**: [bdex.ru](https://bdex.ru/ratings/cities-salary/)
+  - Description: This website provides information about average salaries in different cities. The data on the site is regularly updated and can be useful for comparing salary levels in different regions.
 
+- **Ecology**: [taqi.strelka-kb.com](https://taqi.strelka-kb.com/)
+  - Description: This resource offers information about the environmental situation in various cities. It includes data on air quality, ecosystem status, and other ecological indicators, which can be helpful when choosing a place to live.
+
+- **Population**: [rosinfostat.ru](https://rosinfostat.ru/naselenie-ekaterinburga/)
+  - Description: This site contains data on the population size of cities. By studying this information, you can get an idea of the population growth or decline dynamics in a specific region.
+
+- **Buying Flat Prices**: [realtymag.ru](https://www.realtymag.ru/kvartira/prodazha/prices)
+  - Description: This resource provides information on apartment prices in different cities. Here you can find average housing prices and compare them, which can be useful when planning to buy real estate.
+
+- **Temperature**: [topogis.ru](https://topogis.ru/sravneniye-klimatov-gorodov-rossii-tablitsa.php)
+  - Description: This website offers information on the climate of various cities in Russia. You can get acquainted with the temperature regime, precipitation levels, and other climate characteristics, which can be useful when choosing a place to live.
+
+- **Growth Index**: [infraoneresearch.ru](https://infraoneresearch.ru/)
+  - Description: This site provides data on the growth index for various business and economic indicators of cities. Studying this information can help assess the growth and development potential of cities.
 ### Feedback:
-We welcome your feedback and suggestions for improving the dashboard. Please feel free to reach out to us with your comments.
+
+I welcome your feedback and suggestions for improving the dashboard. Please feel free to reach out to us with your comments.
 
 Let's make city comparisons insightful and fun! 
