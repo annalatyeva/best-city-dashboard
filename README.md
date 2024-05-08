@@ -57,6 +57,6 @@ On mobile devices, radar charts displaying the regional development index are co
   - 
 ### Feedback:
 
-I welcome your feedback and suggestions for improving the dashboard. Please feel free to reach out to us with your comments.
+I welcome your feedback and suggestions for improving the dashboard. Please feel free to reach out to me with your comments.
 
 Let's make city comparisons insightful and fun! 
